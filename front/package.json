@@ -12,7 +12,9 @@
     "report": "cross-env REPORT=true npm run build",
     "preview": "npm run build && vite preview --host",
     "type:check": "vue-tsc --noEmit --skipLibCheck",
-    "lint-staged": "npx lint-staged"
+    "lint-staged": "npx lint-staged",
+    "pretty-check": "prettier \"./**/*.{js,jsx,ts,tsx,json,md,mdx,css,vue}\" --ignore-unknown --check",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json,md,mdx,css,vue}\" --ignore-unknown --config"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [

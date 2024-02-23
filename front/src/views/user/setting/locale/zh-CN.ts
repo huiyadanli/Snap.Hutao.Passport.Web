@@ -20,7 +20,7 @@ export default {
   // new
   'userSetting.label.certification': '实名认证',
   'userSetting.label.role': '角色',
-  'userSetting.label.maintainer' : '管理员',
+  'userSetting.label.maintainer': '管理员',
   'userSetting.label.user': '普通用户',
   'userSetting.label.phone': '手机号码',
   'userSetting.label.accountId': '账号ID',
@@ -48,8 +48,7 @@ export default {
     '请输入您的个人简介，最多不超过200字。',
   'userSetting.form.error.profile.maxLength': '最多不超过200字',
   'userSetting.SecuritySettings.form.label.password': '登录密码',
-  'userSetting.SecuritySettings.placeholder.password':
-    '已设置',
+  'userSetting.SecuritySettings.placeholder.password': '已设置',
   'userSetting.SecuritySettings.form.label.github': 'Github',
   'userSetting.SecuritySettings.placeholder.github': '暂未绑定 Github 账号',
   'userSetting.SecuritySettings.form.label.securityQuestion': '密保问题',
@@ -62,6 +61,9 @@ export default {
     '您暂未设置邮箱，绑定邮箱可以用来找回密码、接收通知等。',
   'userSetting.SecuritySettings.button.settings': '设置',
   'userSetting.SecuritySettings.button.update': '修改',
+  'userSetting.SecuritySettings.button.cancelAccount': '注销账号',
+  'userSetting.SecuritySettings.popconfirm.cancelAccount':
+    '此操作无法恢复，是否继续',
   'userSetting.certification.title.enterprise': '企业实名认证',
   'userSetting.certification.extra.enterprise': '修改认证主体',
   'userSetting.certification.label.accountType': '账号类型',

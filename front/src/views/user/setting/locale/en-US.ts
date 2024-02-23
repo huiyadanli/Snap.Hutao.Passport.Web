@@ -20,7 +20,7 @@ export default {
   // new
   'userSetting.label.certification': 'Certification',
   'userSetting.label.role': 'Role',
-  'userSetting.label.maintainer' : 'Admin',
+  'userSetting.label.maintainer': 'Admin',
   'userSetting.label.user': 'User',
   'userSetting.label.phone': 'Phone',
   'userSetting.label.accountId': 'Account Id',
@@ -28,6 +28,7 @@ export default {
   'userSetting.label.gachaLogExpireAt': 'Service Expiration',
   'userSetting.tab.basicInformation': 'Basic Information',
   'userSetting.tab.securitySettings': 'Security Settings',
+  'userSetting.tab.accountSettings': 'Account Settings',
   'userSetting.tab.certification': 'Certification',
   'userSetting.basicInfo.form.label.email': 'Email',
   'userSetting.basicInfo.placeholder.email': `Please enter your email address, such as xxx{'@'}bytedance.com`,
@@ -50,8 +51,7 @@ export default {
     'Please enter your profile, no more than 200 words',
   'userSetting.form.error.profile.maxLength': 'No more than 200 words',
   'userSetting.SecuritySettings.form.label.password': 'Login Password',
-  'userSetting.SecuritySettings.placeholder.password':
-    'Has been set',
+  'userSetting.SecuritySettings.placeholder.password': 'Has been set',
   'userSetting.SecuritySettings.form.label.github': 'Github',
   'userSetting.SecuritySettings.placeholder.github': 'No Github account bound',
   'userSetting.SecuritySettings.form.label.securityQuestion':
@@ -65,6 +65,9 @@ export default {
     'You have not set a mailbox yet. The mailbox binding can be used to retrieve passwords and receive notifications.',
   'userSetting.SecuritySettings.button.settings': 'Settings',
   'userSetting.SecuritySettings.button.update': 'Update',
+  'userSetting.SecuritySettings.button.cancelAccount': 'Cancel Account',
+  'userSetting.SecuritySettings.popconfirm.cancelAccount':
+    'This action cannot be reversed, are you sure',
   'userSetting.certification.title.enterprise':
     'Enterprise Real Name Authentication',
   'userSetting.certification.extra.enterprise':
