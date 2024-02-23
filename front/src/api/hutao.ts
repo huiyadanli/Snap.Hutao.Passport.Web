@@ -124,6 +124,10 @@ export function deleteGachaEntry(uid: number) {
   return axios.get<number>(`/GachaLog/Delete?Uid=${uid}`);
 }
 
+
+export function pullGachaData<T>(uid:T,configType:T,count:T){
+  return axios.get(`/GachaLog/LimitedRetrieve?uid=${uid}&configType=${configType}&count=${count}`);
+}
 // Management
 
 /**

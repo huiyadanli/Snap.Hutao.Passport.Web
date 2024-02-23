@@ -32,6 +32,16 @@ const USER: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'gachaData',
+      name: 'GachaData',
+      component: () => import('@/views/user/gachaData/index.vue'),
+      meta: {
+        locale: 'menu.user.gachaData',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
 
   ],
 };
