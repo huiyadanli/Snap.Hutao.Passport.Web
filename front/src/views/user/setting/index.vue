@@ -26,9 +26,9 @@
 
 <script lang="ts" setup>
 import UserPanel from './components/user-panel.vue';
-import BasicInformation from './components/basic-information.vue';
+/* import BasicInformation from './components/basic-information.vue'; */
 import SecuritySettings from './components/security-settings.vue';
-import Certification from './components/certification.vue';
+  /* import Certification from './components/certification.vue'; */
 </script>
 
 <script lang="ts">

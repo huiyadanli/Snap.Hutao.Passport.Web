@@ -30,13 +30,19 @@
         </template>
         <template #description>
           <div class="content">
-            <a-typography-paragraph class="tip">
+            <a-typography-paragraph v-if="isGithubAuthorization">
+              {{ $t('userSetting.SecuritySettings.placeholder.bind.github') }}
+            </a-typography-paragraph>
+            <a-typography-paragraph v-if="!isGithubAuthorization" class="tip">
               {{ $t('userSetting.SecuritySettings.placeholder.github') }}
             </a-typography-paragraph>
           </div>
           <div class="operation">
-            <a-link>
-              {{ $t('userSetting.SecuritySettings.button.update') }}
+            <a-link v-if="isGithubAuthorization" @click="unbindGithubAccount">
+              {{ $t('userSetting.SecuritySettings.button.unbind') }}
+            </a-link>
+            <a-link v-if="!isGithubAuthorization" @click="bindGithubAccount">
+              {{ $t('userSetting.SecuritySettings.button.bind') }}
             </a-link>
           </div>
         </template>
@@ -44,12 +50,14 @@
     </a-list-item>
     <a-list-item>
       <div class="content">
-        <a-popconfirm :content="$t('userSetting.SecuritySettings.popconfirm.cancelAccount')">
+        <a-popconfirm :content="$t('userSetting.SecuritySettings.popconfirm.cancelAccount')" @ok="cancelVisible = true">
           <a-button type="primary" status="danger">
             {{ $t('userSetting.SecuritySettings.button.cancelAccount') }}
           </a-button>
         </a-popconfirm>
       </div>
+      <!-- modal -->
+      <CancelAccount v-model:visible="cancelVisible" />
     </a-list-item>
     <!--    <a-list-item>
       <a-list-item-meta>
@@ -96,7 +104,33 @@
   </a-list>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { unbindGithub, getGithubAuthorizationStatus } from '@/api/hutao';
+import { ref } from 'vue';
+import { getToken } from '@/utils/auth';
+import CancelAccount from './cancel-account.vue';
+
+// Github 账号绑定
+const isGithubAuthorization = ref(false);
+const getGithubBindStatus = async () => {
+  const res = await getGithubAuthorizationStatus();
+  isGithubAuthorization.value = res.data.IsAuthorized;
+};
+getGithubBindStatus();
+
+const unbindGithubAccount = async () => {
+  await unbindGithub();
+  await getGithubBindStatus();
+};
+const bindGithubAccount = () => {
+  window.location.href = `https://homa.snapgenshin.com/OAuth/Github/RedirectLogin?token=${encodeURIComponent(
+    getToken() as string
+  )}`;
+};
+
+// 注销账号
+const cancelVisible = ref(false);
+</script>
 
 <style scoped lang="less">
 :deep(.arco-list-item) {

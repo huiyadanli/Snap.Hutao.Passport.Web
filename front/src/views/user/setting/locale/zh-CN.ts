@@ -50,6 +50,7 @@ export default {
   'userSetting.SecuritySettings.form.label.password': '登录密码',
   'userSetting.SecuritySettings.placeholder.password': '已设置',
   'userSetting.SecuritySettings.form.label.github': 'Github',
+  'userSetting.SecuritySettings.placeholder.bind.github': '已绑定',
   'userSetting.SecuritySettings.placeholder.github': '暂未绑定 Github 账号',
   'userSetting.SecuritySettings.form.label.securityQuestion': '密保问题',
   'userSetting.SecuritySettings.placeholder.securityQuestion':
@@ -61,7 +62,10 @@ export default {
     '您暂未设置邮箱，绑定邮箱可以用来找回密码、接收通知等。',
   'userSetting.SecuritySettings.button.settings': '设置',
   'userSetting.SecuritySettings.button.update': '修改',
+  'userSetting.SecuritySettings.button.bind': '绑定',
+  'userSetting.SecuritySettings.button.unbind': '解绑',
   'userSetting.SecuritySettings.button.cancelAccount': '注销账号',
+  'userSetting.SecuritySettings.button.verifyCode': '验证码',
   'userSetting.SecuritySettings.popconfirm.cancelAccount':
     '此操作无法恢复，是否继续',
   'userSetting.certification.title.enterprise': '企业实名认证',
