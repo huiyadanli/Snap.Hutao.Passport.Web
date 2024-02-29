@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Breadcrumb :items="['menu.user.gachaData', 'menu.user.gachaData']" />
-    <a-card class="general-card" :title="$t('menu.user.gachaData')"  >
+    <a-card class="general-card" :title="$t('menu.user.gachaData')">
       <a-row>
         <a-col :flex="1">
           <a-form :model="formModel" :label-col-props="{ span: 4 }" :wrapper-col-props="{ span: 18 }" label-align="left"
@@ -89,14 +89,14 @@
 
           <a-row style="padding-top: 15px;">
             <a-col :span="12">
-              <a-button type="primary">
+              <a-button type="primary" @click="handPagePrev">
                 <icon-left />
-                Prev
+                {{ $t("gachaData.page.prev") }}
               </a-button>
             </a-col>
             <a-col :span="12">
-              <a-button type="primary" style="float: right;">
-                Next
+              <a-button type="primary" style="float: right;" @click="handPagaNext">
+                {{ $t("gachaData.page.next") }}
                 <icon-right />
               </a-button>
             </a-col>
@@ -120,7 +120,7 @@
 import { computed, ref, reactive, watch, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 import useLoading from '@/hooks/loading';
-import { queryPolicyList, PolicyRecord, PolicyParams } from '@/api/list';
+import { gachaDataRecord } from '@/api/list';
 import { Pagination } from '@/types/global';
 import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
 import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
@@ -128,6 +128,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import Sortable from 'sortablejs';
 import { pullGachaData } from "@/api/hutao";
 import { Alert, Message } from '@arco-design/web-vue';
+import { stringify } from 'query-string/base';
 
 type SizeProps = 'mini' | 'small' | 'medium' | 'large';
 type Column = TableColumnData & { checked?: true };
@@ -147,17 +148,24 @@ const generateFormModel = () => {
     ItemId: '',
     Time: '',
     Id: '',
-    count: "200"
+    count: "5"
   };
 };
+const pageParamModel = () => {
+  return {
+    prevId:'',
+    nextId:'',
+    currentPage: 1 
+  }
+}
 const { loading, setLoading } = useLoading(true);
 const { t } = useI18n();
-const renderData = ref<PolicyRecord[]>([]);
+const renderData = ref<gachaDataRecord[]>([]);
 const formModel = ref(generateFormModel());
 const cloneColumns = ref<Column[]>([]);
 const showColumns = ref<Column[]>([]);
 const size = ref<SizeProps>('medium');
-
+const pageParam = ref(pageParamModel());
 
 const rules = {
   uid: [
@@ -173,14 +181,7 @@ const rules = {
 }
 
 
-const basePagination: Pagination = {
-  current: 1,
-  pageSize: 20,
-};
-const pagination = reactive({
-  ...basePagination,
-  count: String,
-});
+
 // const densityList = computed(() => [
 //   {
 //     name: t('searchTable.size.mini'),
@@ -263,9 +264,7 @@ const GachaTypeOptions = computed<SelectOptionData[]>(() => [
 //     value: 'offline',
 //   },
 // ]);
-const fetchData = async (
-
-) => {
+const fetchData = async (id?: string) => {
   setLoading(true);
   if (formModel.value.uid === "" || formModel.value.GachaType === "") {
     Message.error({
@@ -274,15 +273,28 @@ const fetchData = async (
     });
     return;
   }
-  try {
-    const { data } = await pullGachaData<string>(formModel.value.uid, formModel.value.GachaType, formModel.value.count)
-    console.log(data)
-    renderData.value = data;
-  } catch (err) {
-    // you can report use errorHandler or other
-  } finally {
-    setLoading(false);
+  if (typeof id === "undefined") {
+    try {
+      const res = await pullGachaData<string>(formModel.value.uid, formModel.value.GachaType, formModel.value.count)
+      renderData.value = res.data;
+    } catch (err) {
+      // you can report use errorHandler or other
+    } finally {
+      setLoading(false);
+    }
+  } else {
+    try {
+      const res = await pullGachaData<string>(formModel.value.uid, formModel.value.GachaType, formModel.value.count,id)
+      renderData.value = res.data;
+    } catch (err) {
+      // you can report use errorHandler or other
+    } finally {
+      setLoading(false);
+    }
   }
+
+  pageParam.value.nextId = renderData.value[renderData.value.length - 1].Id
+
 };
 
 const search = () => {
@@ -296,6 +308,16 @@ fetchData();
 const reset = () => {
   formModel.value = generateFormModel();
 };
+
+const handPagePrev = () => {
+
+  pageParam.value.currentPage +=1;
+}
+
+const handPagaNext = () => {
+  fetchData(pageParam.value.nextId);
+  pageParam.value.currentPage +=1;
+}
 
 const handleSelectDensity = (
   val: string | number | Record<string, any> | undefined,

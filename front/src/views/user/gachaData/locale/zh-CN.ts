@@ -18,5 +18,7 @@ export default {
   'gachaData.columns.Time':'时间',
   'gachaData.columns.Id':'id',
   'gachaData.form.loseParam':'请输入uid和卡池类型',
-  'gachaData.common.msg.need':'必输项'
+  'gachaData.common.msg.need':'必输项',
+  'gachaData.page.prev':'上一页',
+  'gachaData.page.next':'下一页'
 };
