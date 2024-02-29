@@ -12,7 +12,12 @@ export interface PolicyRecord {
   status: 'online' | 'offline';
   createdTime: string;
 }
-
+export interface gachaDataRecord {
+  GachaType : string;
+  ItemId : string;  
+  Time : Date;
+  Id : string;
+}
 export interface PolicyParams extends Partial<PolicyRecord> {
   current: number;
   pageSize: number;
